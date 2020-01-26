@@ -6,11 +6,8 @@ import           ClassyPrelude           hiding ( Reader )
 
 import           Control.Monad.Base             ( MonadBase(..) )
 import           Control.Eff                    ( )
-import           Control.Eff.Lift
-import           Control.Eff.Log                ( runLog
-                                                , Logger
+import           Control.Eff.Log                ( Logger
                                                 )
-import           Control.Eff.Reader.Strict
 
 import           Data.UUID               hiding ( null )
 import           Data.UUID.V4

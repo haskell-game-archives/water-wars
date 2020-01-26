@@ -1,99 +1,106 @@
-cabal-version: 1.12
-
-name:           water-wars
-version:        0.0.0
-synopsis:       The core of WaterWars
-homepage:       https://github.com/FailWhaleBrigade/water-wars#readme
-bug-reports:    https://github.com/FailWhaleBrigade/water-wars/issues
-author:         Fendor, VeryMilkyJoe, Power-Fungus
-maintainer:     Fendor, VeryMilkyJoe, Power-Fungus
-license:        MIT
-build-type:     Simple
+cabal-version:      2.4
+name:               water-wars
+version:            0.0.0
+synopsis:           The core of WaterWars
+homepage:           https://github.com/FailWhaleBrigade/water-wars#readme
+bug-reports:        https://github.com/FailWhaleBrigade/water-wars/issues
+author:             Fendor, VeryMilkyJoe, Power-Fungus
+maintainer:         Fendor, VeryMilkyJoe, Power-Fungus
+license:            MIT
+build-type:         Simple
 extra-source-files:
-    CHANGELOG.md
-    LICENSE.md
-    README.md
-    stack.yaml
+  CHANGELOG.md
+  LICENSE.md
+  README.md
+  stack.yaml
 
 source-repository head
-  type: git
+  type:     git
   location: https://github.com/FailWhaleBrigade/water-wars
 
+common common
+  build-depends:      base ^>=4.12
+  default-extensions:
+    NoImplicitPrelude
+    NamedFieldPuns
+    OverloadedStrings
+    RecordWildCards
+    ScopedTypeVariables
+
+  ghc-options:        -Wall -eventlog
+  default-language:   Haskell2010
+
 library
+  import:             common
   exposed-modules:
-      WaterWars.Core.DefaultGame
-      WaterWars.Core.Game
-      WaterWars.Core.Game.Action
-      WaterWars.Core.Game.Base
-      WaterWars.Core.Game.Constants
-      WaterWars.Core.Game.Events
-      WaterWars.Core.Game.Map
-      WaterWars.Core.Game.State
-      WaterWars.Core.Game.Utils
-      WaterWars.Core.GameNg
-      WaterWars.Core.Physics
-      WaterWars.Core.Physics.Collision
-      WaterWars.Core.Physics.Constants
-      WaterWars.Core.Physics.Geometry
-      WaterWars.Core.Physics.Projectiles
-      WaterWars.Core.Physics.Utils
-      WaterWars.Core.Terrain.Block
-      WaterWars.Core.Terrain.Decoration
-      WaterWars.Core.Terrain.Read
-      WaterWars.Network.Protocol
-  other-modules:
-      Paths_water_wars
-  hs-source-dirs:
-      library
-  default-extensions: DeriveGeneric NamedFieldPuns OverloadedStrings NoImplicitPrelude ScopedTypeVariables RecordWildCards LambdaCase FlexibleContexts MonoLocalBinds
-  ghc-options: -Wall -eventlog
+    WaterWars.Core.DefaultGame
+    WaterWars.Core.Game
+    WaterWars.Core.Game.Action
+    WaterWars.Core.Game.Base
+    WaterWars.Core.Game.Constants
+    WaterWars.Core.Game.Events
+    WaterWars.Core.Game.Map
+    WaterWars.Core.Game.State
+    WaterWars.Core.Game.Utils
+    WaterWars.Core.GameNg
+    WaterWars.Core.Physics
+    WaterWars.Core.Physics.Collision
+    WaterWars.Core.Physics.Constants
+    WaterWars.Core.Physics.Geometry
+    WaterWars.Core.Physics.Projectiles
+    WaterWars.Core.Physics.Utils
+    WaterWars.Core.Terrain.Block
+    WaterWars.Core.Terrain.Decoration
+    WaterWars.Core.Terrain.Read
+    WaterWars.Network.Protocol
+
+  other-modules:      Paths_water_wars
+  hs-source-dirs:     library
+  default-extensions:
+    DeriveGeneric
+    FlexibleContexts
+    LambdaCase
+    MonoLocalBinds
+
   build-depends:
-      array
-    , base
-    , cereal
-    , classy-prelude
-    , extensible-effects >=3.1 && <3.2
-    , extra
-  default-language: Haskell2010
+    , array               ^>=0.5.3
+    , cereal              ^>=0.5.8
+    , classy-prelude      ^>=1.5
+    , extensible-effects  ^>=5.0
+    , extra               ^>=1.6.18
 
 test-suite water-wars-test-suite
-  type: exitcode-stdio-1.0
-  main-is: Main.hs
+  import:         common
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
   other-modules:
-      WaterWars.Core.CollisionTest
-      WaterWars.Core.GameNgTest
-      WaterWars.Core.GameUtilsTest
-      WaterWars.Core.GeometryTest
-      WaterWars.Core.Terrains
-      WaterWars.Core.TerrainsUtils
-      Paths_water_wars
-  hs-source-dirs:
-      test-suite
-  default-extensions: NamedFieldPuns OverloadedStrings NoImplicitPrelude ScopedTypeVariables RecordWildCards
-  ghc-options: -Wall -eventlog -rtsopts -threaded -with-rtsopts=-N
+    Paths_water_wars
+    WaterWars.Core.CollisionTest
+    WaterWars.Core.GameNgTest
+    WaterWars.Core.GameUtilsTest
+    WaterWars.Core.GeometryTest
+    WaterWars.Core.Terrains
+    WaterWars.Core.TerrainsUtils
+
+  hs-source-dirs: test-suite
+  ghc-options:    -rtsopts -threaded -with-rtsopts=-N
   build-depends:
-      HUnit
-    , array
-    , base
-    , classy-prelude
-    , hspec
-    , tasty
-    , tasty-hspec
-    , tasty-hunit
+    , array           ^>=0.5.3
+    , classy-prelude  ^>=1.5
+    , hspec           ^>=2.7.1
+    , HUnit           ^>=1.6
+    , tasty           ^>=1.2.3
+    , tasty-hspec     ^>=1.1.5
+    , tasty-hunit     ^>=0.10
     , water-wars
-  default-language: Haskell2010
 
 benchmark water-wars-benchmarks
-  type: exitcode-stdio-1.0
-  main-is: Main.hs
-  other-modules:
-      Paths_water_wars
-  hs-source-dirs:
-      benchmark
-  default-extensions: NamedFieldPuns OverloadedStrings NoImplicitPrelude ScopedTypeVariables RecordWildCards
-  ghc-options: -Wall -eventlog -rtsopts -threaded -with-rtsopts=-N
+  import:         common
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  other-modules:  Paths_water_wars
+  hs-source-dirs: benchmark
+  ghc-options:    -rtsopts -threaded -with-rtsopts=-N
   build-depends:
-      base
-    , criterion
+    , criterion   ^>=1.5.6
     , water-wars
-  default-language: Haskell2010

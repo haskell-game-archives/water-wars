@@ -5,7 +5,6 @@ import           ClassyPrelude           hiding ( Reader
                                                 )
 import           Control.Eff
 import           Control.Eff.Reader.Strict
-import           Control.Eff.Lift
 import           Control.Eff.Log
 import qualified Control.Eff.Log               as EffLog
 import           WaterWars.Core.Game

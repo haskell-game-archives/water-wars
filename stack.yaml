@@ -1,16 +1,14 @@
-resolver: lts-12.26
-
+resolver: lts-14.21
 packages:
 - .
 - server
 - client
 
 extra-deps:
-- extensible-effects-3.1.0.1
-- extra-1.6.8
-- th-format-0.1.2.0
-- proteaaudio-0.7.0.1
-- log-effect-1.1.1
+- extensible-effects-5.0.0.1@sha256:2ed0bee04c8bf334358147da6d92ff31e9fbbefceb75ef3e408a0d858aec0cc6,9013
+- log-effect-1.2.0@sha256:a3ee3087ba120f7541cdec119ca6214b84f360e2f278c0d77109f02958075c7e,1848
+- optparse-applicative-0.15.1.0@sha256:a0b9924d88a17c36cd8e6839d7dd2138419dd8f08cbb4f9af18f3c367b0c69a3,4673
+- proteaaudio-0.7.1.0@sha256:926a4437d239d453fc629c33ab5512211a6e6fe300c2f86efc6238ac1d587aa1,2598
 
 nix:
         # pure: false

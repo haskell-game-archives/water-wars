@@ -14,7 +14,6 @@ import           Control.Eff
 import           Control.Eff.Reader.Strict
 import           Control.Eff.Log
 import qualified Control.Eff.Log               as EffLog
-import           Control.Eff.Lift        hiding ( lift )
 
 import           WaterWars.Network.Protocol
 import           WaterWars.Core.Game
@@ -144,7 +143,7 @@ handleCmd_ env@Env {..} cmd = case cmd of
     PauseGameCmd ->
         return env { serverEnv = serverEnv { serverState = Paused } }
 
-    GameOverCmd winner ->
+    GameOverCmd _winner ->
         return env { serverEnv = serverEnv { serverState = Over } }
 
     AddPlayerCmdActionCmd sessionId action -> do

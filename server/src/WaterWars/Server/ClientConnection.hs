@@ -5,7 +5,6 @@ import           ClassyPrelude
 import           Control.Eff
 import           Control.Eff.Log
 import qualified Control.Eff.Log               as EffLog
-import           Control.Eff.Lift        hiding ( lift )
 
 import           WaterWars.Network.Protocol
 
