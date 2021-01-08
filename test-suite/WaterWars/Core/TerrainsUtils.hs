@@ -16,7 +16,7 @@ terrainWithBlockAt :: (Int, Int) -> Terrain
 terrainWithBlockAt location =
   Terrain $
     accumArray
-      (\ _ x -> x)
+      (\_ x -> x)
       NoBlock
       smallBounds
       [(BlockLocation location, SolidBlock Middle)]
@@ -24,7 +24,7 @@ terrainWithBlockAt location =
 terrainWithBlocksAt :: [(Int, Int)] -> Terrain
 terrainWithBlocksAt locations =
   Terrain $
-    accumArray (\ _ x -> x) NoBlock smallBounds $
+    accumArray (\_ x -> x) NoBlock smallBounds $
       map
         (\l -> (BlockLocation l, SolidBlock Middle))
         locations
