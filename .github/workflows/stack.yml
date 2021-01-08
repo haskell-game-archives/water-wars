@@ -42,7 +42,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        sudo apt-get install -y freeglut3-dev libpulse-dev
+        sudo apt-get install -y freeglut3-dev libpulse-dev libasound-dev
     
     # - name: Install libralies (mac)
     #   if: runner.os == 'macOS'
