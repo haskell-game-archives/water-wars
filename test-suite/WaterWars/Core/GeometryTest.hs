@@ -1,4 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
+
 module WaterWars.Core.GeometryTest where
 
 import ClassyPrelude

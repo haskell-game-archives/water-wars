@@ -1,4 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude #-}
+
 module WaterWars.Core.GameUtilsTest where
 
 import ClassyPrelude
