@@ -1,5 +1,10 @@
 # Water-Wars
 
+[![cabal](https://github.com/haskell-game-archives/water-wars/workflows/cabal/badge.svg)](https://github.com/haskell-game-archives/water-wars/actions?query=workflow%3Acabal)
+[![stack](https://github.com/haskell-game-archives/water-wars/workflows/stack/badge.svg)](https://github.com/haskell-game-archives/water-wars/actions?query=workflow%3Astack)
+[![lint](https://github.com/haskell-game-archives/water-wars/workflows/lint/badge.svg)](https://github.com/haskell-game-archives/water-wars/actions?query=workflow%3Alint)
+[![format](https://github.com/haskell-game-archives/water-wars/workflows/format/badge.svg)](https://github.com/haskell-game-archives/water-wars/actions?query=workflow%3Aformat)
+
 [![Build Status](https://travis-ci.org/FailWhaleBrigade/water-wars.svg?branch=frontend)](https://travis-ci.org/FailWhaleBrigade/water-wars)
 
 The game idea was to clone "Towerfall", a fast paced multiplayer shooting-platforming game. For a more creative touch, this game was supossed to feature under-water levels where your movement is drastically different. Mermaids fight to become the princess and are shooting with bubbles at each other.

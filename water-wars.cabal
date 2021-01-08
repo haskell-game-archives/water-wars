@@ -19,19 +19,21 @@ source-repository head
   location: https://github.com/FailWhaleBrigade/water-wars
 
 common common
-  build-depends:      base ^>=4.12
-  default-extensions:
-    NoImplicitPrelude
-    NamedFieldPuns
-    OverloadedStrings
-    RecordWildCards
-    ScopedTypeVariables
-
-  ghc-options:        -Wall -eventlog
-  default-language:   Haskell2010
+  build-depends:    base
+  ghc-options:      -Wall
+  default-language: Haskell2010
 
 library
-  import:             common
+  import:          common
+  hs-source-dirs:  src
+  build-depends:
+    , array
+    , cereal
+    , classy-prelude
+    , extensible-effects
+    , extra
+
+  -- cabal-fmt: expand src
   exposed-modules:
     WaterWars.Core.DefaultGame
     WaterWars.Core.Game
@@ -54,25 +56,23 @@ library
     WaterWars.Core.Terrain.Read
     WaterWars.Network.Protocol
 
-  other-modules:      Paths_water_wars
-  hs-source-dirs:     library
-  default-extensions:
-    DeriveGeneric
-    FlexibleContexts
-    LambdaCase
-    MonoLocalBinds
-
-  build-depends:
-    , array               ^>=0.5.3
-    , cereal              ^>=0.5.8
-    , classy-prelude      ^>=1.5
-    , extensible-effects  ^>=5.0
-    , extra               ^>=1.6.18
+  other-modules:   Paths_water_wars
 
 test-suite water-wars-test-suite
   import:         common
   type:           exitcode-stdio-1.0
+  hs-source-dirs: test-suite
   main-is:        Main.hs
+  build-depends:
+    , array
+    , classy-prelude
+    , hspec
+    , HUnit
+    , tasty
+    , tasty-hspec
+    , tasty-hunit
+    , water-wars
+
   other-modules:
     Paths_water_wars
     WaterWars.Core.CollisionTest
@@ -82,25 +82,12 @@ test-suite water-wars-test-suite
     WaterWars.Core.Terrains
     WaterWars.Core.TerrainsUtils
 
-  hs-source-dirs: test-suite
-  ghc-options:    -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-    , array           ^>=0.5.3
-    , classy-prelude  ^>=1.5
-    , hspec           ^>=2.7.1
-    , HUnit           ^>=1.6
-    , tasty           ^>=1.2.3
-    , tasty-hspec     ^>=1.1.5
-    , tasty-hunit     ^>=0.10
-    , water-wars
-
 benchmark water-wars-benchmarks
   import:         common
   type:           exitcode-stdio-1.0
   main-is:        Main.hs
   other-modules:  Paths_water_wars
   hs-source-dirs: benchmark
-  ghc-options:    -rtsopts -threaded -with-rtsopts=-N
   build-depends:
-    , criterion   ^>=1.5.6
+    , criterion
     , water-wars

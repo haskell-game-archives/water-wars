@@ -1,0 +1,41 @@
+name: format
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: "00 15 * * *"
+
+jobs:
+  ormolu:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: mrkkrp/ormolu-action@v1
+
+  cabal-fmt:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        cache-version: ["2021-01-08"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      name: Cache ~/.cabal/store
+      with:
+        path: ~/.cabal/store
+        key: ${{ runner.os }}-${{ matrix.cache-version }}-cabal
+
+    - name: Install cabal-fmt
+      run: |
+        cabal update
+        cabal install cabal-fmt --overwrite-policy=always --install-method=copy -j2 -z
+        
+    - name: Apply cabal-fmt
+      run: |
+        export PATH=~/.cabal/bin/:$PATH
+        cabal-fmt -i *.cabal client/*.cabal server/*.cabal
+        cabal-fmt -n -i cabal.project
+        git --no-pager diff --exit-code

@@ -1,0 +1,48 @@
+name: cabal
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: "00 15 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        # Disable ghc-8.10 
+        # https://github.com/csabahruska/proteaaudio/issues/6
+        ghc: ["8.6", "8.8"]
+        cabal: ["3.2"]
+        cache-version: ["2021-01-08"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: haskell/actions/setup@v1
+      with:
+        ghc-version: ${{ matrix.ghc }}
+        cabal-version: ${{ matrix.cabal }}
+
+    - name: Cache cabal
+      uses: actions/cache@v2
+      with:
+        path: ~/.cabal/store
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.cache-version }}-cabal
+
+    - name: Install libralies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y freeglut3-dev libpulse-dev
+        
+    - name: Install dependencies
+      run: |
+        cabal update
+        cabal configure --disable-optimization --write-ghc-environment-files=always -j2
+        cabal build --only-dependencies
+
+    - name: Build
+      run: |
+        cabal build
+        cabal install all:exes --overwrite-policy=always
