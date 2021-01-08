@@ -1,6 +1,5 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE ScopedTypeVariables #-}
@@ -61,7 +60,7 @@ runLoop arguments = do
             else gameMapFiles arguments
   -- read resources
   -- TODO: this fails ugly
-  terrains_ <- (mapM readTerrainFromFile gameMapFiles_)
+  terrains_ <- mapM readTerrainFromFile gameMapFiles_
   case sequenceA terrains_ of
     Nothing -> liftIO $ exitWith (ExitFailure 2)
     Just terrains -> do

@@ -35,7 +35,7 @@ intersectionTests = do
     intersectionOfLines
       (Line (Location (1, 1)) (VelocityVector (-1) (-1)))
       (Line (Location (-1, 1)) (VelocityVector 1 (-1)))
-      `shouldBe` (Just $ Intersection (Location (0, 0)) 1 1)
+      `shouldBe` Just (Intersection (Location (0, 0)) 1 1)
   it "almost parallel lines should not intersect" $
     intersectionOfLines
       (Line (Location (1, 1)) (VelocityVector 1 1))

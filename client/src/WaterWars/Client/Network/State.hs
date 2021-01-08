@@ -1,4 +1,3 @@
-{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE TypeFamilies #-}
 
 module WaterWars.Client.Network.State where

@@ -111,9 +111,7 @@ initializeState resources@Resources {..} =
                           Animation
                             { countDownTilNext = 9,
                               countDownMax = 9,
-                              animationPictures =
-                                (take 2 playerDeathTextures)
-                                  ++ (cycle (drop 2 playerDeathTextures))
+                              animationPictures = take 2 playerDeathTextures ++ cycle (drop 2 playerDeathTextures)
                             },
                         location = Location (0, 0), -- default location
                         updateOperation = deadPlayerUpdateOperation,

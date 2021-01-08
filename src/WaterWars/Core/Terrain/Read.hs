@@ -26,7 +26,7 @@ readTerrainFromFile terrainFilePath = do
 charMatrixToTerrain :: [String] -> Either Text Terrain
 charMatrixToTerrain x = do
   let height = length x
-  when (height `mod` 2 == 0) $ Left "height has to be an odd number"
+  when (even height) $ Left "height has to be an odd number"
   let widths = map length x
   unless (allEqual widths) $ Left "not all lines have equal length"
   let width = headEx widths

@@ -53,4 +53,4 @@ updateBackgroundAnimation :: BackgroundAnimation -> BackgroundAnimation
 updateBackgroundAnimation a = b {animation = newAnimation}
   where
     newAnimation = updateAnimation (animation a)
-    b = (updateOperation a) a
+    b = updateOperation a a
