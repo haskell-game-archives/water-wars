@@ -1,83 +1,85 @@
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+
 module WaterWars.Server.Env where
 
-import           ClassyPrelude           hiding ( Reader )
+import ClassyPrelude hiding (Reader)
+import WaterWars.Core.Game
+import WaterWars.Server.Events
 
-import           WaterWars.Core.Game
+data Env = Env
+  { serverEnv :: ServerEnv,
+    networkEnv :: NetworkEnv,
+    gameEnv :: GameEnv,
+    gameConfig :: GameConfig
+  }
+  deriving (Show)
 
-import           WaterWars.Server.Events
+newtype NetworkEnv = NetworkEnv
+  { connectionMap :: Map Player Connection
+  }
+  deriving (Show)
 
-data Env =
-    Env
-        { serverEnv :: ServerEnv
-        , networkEnv :: NetworkEnv
-        , gameEnv :: GameEnv
-        , gameConfig :: GameConfig
-        } deriving (Show)
+data GameEnv = GameEnv
+  { playerMap :: Map Player InGamePlayer,
+    readyPlayers :: Set Player,
+    playerAction :: PlayerActions
+  }
+  deriving (Show)
 
-newtype NetworkEnv =
-    NetworkEnv
-        { connectionMap ::  Map Player Connection
-        } deriving (Show)
+data ServerEnv = ServerEnv
+  { gameLoop :: GameLoopState,
+    eventMap :: EventMap,
+    serverState :: ServerState
+  }
+  deriving (Show)
 
-data GameEnv =
-    GameEnv
-        { playerMap  ::  Map Player InGamePlayer
-        , readyPlayers ::  Set Player
-        , playerAction ::  PlayerActions
-        } deriving (Show)
-
-data ServerEnv =
-    ServerEnv
-        { gameLoop :: GameLoopState
-        , eventMap :: EventMap
-        , serverState :: ServerState
-        } deriving (Show)
-
-data GameConfig =
-    GameConfig
-        { fps :: Float
-        , gameMaps :: GameMaps
-        } deriving (Show)
+data GameConfig = GameConfig
+  { fps :: Float,
+    gameMaps :: GameMaps
+  }
+  deriving (Show)
 
 data ServerState
-    = Paused
-    | Running
-    | Over
-    | WarmUp
-    deriving (Eq, Ord, Enum, Show)
+  = Paused
+  | Running
+  | Over
+  | WarmUp
+  deriving (Eq, Ord, Enum, Show)
 
 type EventMap = Map Integer FutureEvent
 
 data GameLoopState = GameLoopState
-    { gameMap     :: GameMap
-    , gameState   :: GameState
-    } deriving (Show, Eq)
+  { gameMap :: GameMap,
+    gameState :: GameState
+  }
+  deriving (Show, Eq)
 
 newtype PlayerActions = PlayerActions
-    { getPlayerActions :: Map Player Action
-    } deriving (Show, Eq)
+  { getPlayerActions :: Map Player Action
+  }
+  deriving (Show, Eq)
 
-
-data GameMaps =
-    GameMaps
-        { gameMapsList :: Seq GameMap
-        , currentGameMapIndex :: Int
-        } deriving (Show, Eq, Read)
+data GameMaps = GameMaps
+  { gameMapsList :: Seq GameMap,
+    currentGameMapIndex :: Int
+  }
+  deriving (Show, Eq, Read)
 
 data FutureEvent
-    = ResetGame
-    | StartGame
-    deriving (Show, Read, Eq, Ord, Enum)
+  = ResetGame
+  | StartGame
+  deriving (Show, Read, Eq, Ord, Enum)
 
 advanceGameMaps :: GameMaps -> GameMaps
 advanceGameMaps GameMaps {..} =
-    let nextGameMapIndex = (currentGameMapIndex + 1) `mod` length gameMapsList
-    in  GameMaps {currentGameMapIndex = nextGameMapIndex, ..}
+  let nextGameMapIndex = (currentGameMapIndex + 1) `mod` length gameMapsList
+   in GameMaps {currentGameMapIndex = nextGameMapIndex, ..}
 
 currentMap :: GameMaps -> GameMap
 currentMap GameMaps {..} = gameMapsList `indexEx` currentGameMapIndex
 
-modifyGameState
-    :: (GameState -> a -> GameState) -> GameLoopState -> a -> GameLoopState
+modifyGameState ::
+  (GameState -> a -> GameState) -> GameLoopState -> a -> GameLoopState
 modifyGameState f GameLoopState {..} a =
-    GameLoopState {gameState = f gameState a, ..}
+  GameLoopState {gameState = f gameState a, ..}

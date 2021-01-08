@@ -1,0 +1,19 @@
+resolver: lts-14.27 # ghc-8.6.5
+packages:
+- .
+- server
+- client
+
+extra-deps:
+- extensible-effects-5.0.0.1@sha256:2ed0bee04c8bf334358147da6d92ff31e9fbbefceb75ef3e408a0d858aec0cc6,9013
+- log-effect-1.2.0@sha256:a3ee3087ba120f7541cdec119ca6214b84f360e2f278c0d77109f02958075c7e,1848
+- proteaaudio-0.8.0@sha256:3d383567f6d51c538ef9054b9b2c0ca924d95ca2994b57171a933a7f4efed298,2596
+
+nix:
+        # pure: false
+  packages:
+  - mesa_noglu
+  - freeglut
+  - zlib
+  - gmp
+  - libpulseaudio
