@@ -5,13 +5,6 @@
 
 packages:
 - completed:
-    hackage: extensible-effects-5.0.0.1@sha256:2ed0bee04c8bf334358147da6d92ff31e9fbbefceb75ef3e408a0d858aec0cc6,9013
-    pantry-tree:
-      size: 3306
-      sha256: 4c520f1ccb76ed1d304cb5967e6679e31c907d3c0ba5d7e4a459e827b9a08173
-  original:
-    hackage: extensible-effects-5.0.0.1@sha256:2ed0bee04c8bf334358147da6d92ff31e9fbbefceb75ef3e408a0d858aec0cc6,9013
-- completed:
     hackage: log-effect-1.2.0@sha256:a3ee3087ba120f7541cdec119ca6214b84f360e2f278c0d77109f02958075c7e,1848
     pantry-tree:
       size: 373
@@ -19,19 +12,12 @@ packages:
   original:
     hackage: log-effect-1.2.0@sha256:a3ee3087ba120f7541cdec119ca6214b84f360e2f278c0d77109f02958075c7e,1848
 - completed:
-    hackage: optparse-applicative-0.15.1.0@sha256:a0b9924d88a17c36cd8e6839d7dd2138419dd8f08cbb4f9af18f3c367b0c69a3,4673
-    pantry-tree:
-      size: 2904
-      sha256: f3baab2f89cb92de0f90cf9ac3a89f20f3b28bffd1be7b09c9e611a8c6957e61
-  original:
-    hackage: optparse-applicative-0.15.1.0@sha256:a0b9924d88a17c36cd8e6839d7dd2138419dd8f08cbb4f9af18f3c367b0c69a3,4673
-- completed:
-    hackage: proteaaudio-0.7.1.0@sha256:926a4437d239d453fc629c33ab5512211a6e6fe300c2f86efc6238ac1d587aa1,2598
+    hackage: proteaaudio-0.8.0@sha256:3d383567f6d51c538ef9054b9b2c0ca924d95ca2994b57171a933a7f4efed298,2596
     pantry-tree:
       size: 1877
-      sha256: f6ba68f00b35abf46be7556ed78038ca772368a5445ac8176ef81fff4c965fbf
+      sha256: 9f403942433857e2ae27c734d12d9eb5d06497dcdbada3ef5b645a3982a04664
   original:
-    hackage: proteaaudio-0.7.1.0@sha256:926a4437d239d453fc629c33ab5512211a6e6fe300c2f86efc6238ac1d587aa1,2598
+    hackage: proteaaudio-0.8.0@sha256:3d383567f6d51c538ef9054b9b2c0ca924d95ca2994b57171a933a7f4efed298,2596
 snapshots:
 - completed:
     size: 533252

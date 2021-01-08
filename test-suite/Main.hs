@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module Main where
 
 -- Tasty makes it easy to test your code. It is a test framework that can
