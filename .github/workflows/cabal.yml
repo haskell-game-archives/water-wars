@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        ghc: ["8.6", "8.8", "8.10"]
-        # cabal: ["3.2"]
-        cabal: ["3.4.0.0-rc6"]
+        # Disable ghc-8.10 
+        # https://github.com/csabahruska/proteaaudio/issues/6
+        ghc: ["8.6", "8.8"]
+        cabal: ["3.2"]
         cache-version: ["2021-01-08"]
 
     steps:
